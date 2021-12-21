@@ -1,4 +1,4 @@
-## Rapid deploy Kubernetes v1.22.1 and elements by Ansible
+## Kani - Rapid deploy Kubernetes v1.22.1 and elements by Ansible
 
 ### Content:
 
