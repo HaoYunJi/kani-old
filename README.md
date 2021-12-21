@@ -113,7 +113,7 @@
 - Deploy kubernetes cluster after changing all files:
 
 ```bash
-$ cd rapid-kube-deploy
+$ cd kani
 $ chmod +x ./kani
 $ ./kani deploy-kube
 ```
