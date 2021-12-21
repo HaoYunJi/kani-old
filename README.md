@@ -110,6 +110,12 @@
 
 ### Usage:
 
+- Kani directory tree structure as following:
+  
+  ![](https://github.com/Alberthua-Perl/tech-docs/blob/master/images/rapid-kube-deploy/kani-tree.jpg)
+  
+  Because of GitHub uploading size limit, `cri-containerd-cni-1.5.5-linux-amd64.tar.gz` can be downloaded use this [link](https://pan.baidu.com/s/1ytxDjSN0u5Tewy5rcEGWNQ), password is `apdl`.
+
 - Deploy kubernetes cluster after changing all files:
 
 ```bash
@@ -117,8 +123,6 @@ $ cd kani
 $ chmod +x ./kani
 $ ./kani deploy-kube
 ```
-
-- Because of GitHub uploading size limit, `cri-containerd-cni-1.5.5-linux-amd64.tar.gz` can be downloaded use this [link](https://pan.baidu.com/s/1ytxDjSN0u5Tewy5rcEGWNQ), password is `apdl`.
 
 - kubernetes cluster status in the project as following:
   
