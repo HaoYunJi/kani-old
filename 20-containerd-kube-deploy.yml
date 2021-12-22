@@ -17,7 +17,6 @@
         owner: root
         group: root
       loop: "{{ ctr_files }}"
-
       # Because containerd depends on runc and containernetworking-plugins,
       # the package includes binary runc and containerd cni plugin.
       # So unarchive package under /, you can use tools directly.
@@ -28,6 +27,11 @@
         dest: /
         remote_src: yes
         # remote_src define remote managed nodes src path
+
+    - name: Change /usr/local/bin/nerdctl permission
+      file:
+        path: /usr/local/bin/nerdctl
+        mode: '0755'
 
 - name: Install and configure containerd high-level runtime
   hosts: masters,nodes
