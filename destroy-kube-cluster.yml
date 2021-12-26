@@ -21,4 +21,7 @@
       loop:
         - /root/.kube
         - "/home/{{ operator_user }}/.kube"
+
+    - name: Clear iptables and ipvs rules
+      command: iptables -F -t filter && iptables -F -t nat && ipvsadm --clear
 ...        

@@ -7,9 +7,12 @@
 
 ### deploy and destroy kubernetes cluster ###
 deploy_kube() {
-	ansible-playbook 10-general-prepare-kube.yml
-	ansible-playbook 20-containerd-kube-deploy.yml
-	ansible-playbook 30-kube-cluster-deploy.yml
+	ansible-playbook 00-general-prepare-kube.yml 
+	ansible-playbook 01-containerd-kube-deploy.yml
+	ansible-playbook 02-kube-cluster-calio-deploy.yml
+	echo -e "---> [\033[1;32mINFO\033[0m] Waiting for 5mins to initial kube cluster..."
+	sleep 300s
+	ansible-playbook 03-post-kube-deploy.yml
 }
 
 destroy_kube() {
@@ -18,8 +21,8 @@ destroy_kube() {
 
 ### config deploy Red Hat Quay registry ###
 config_quay() {
-	ansible-playbook 40-provision-quay-registry.yml --tags install-docker-ce
-	ansible-playbook 40-provision-quay-registry.yml --tags config-quay
+	ansible-playbook provision-quay-registry.yml --tags install-docker-ce
+	ansible-playbook provision-quay-registry.yml --tags config-quay
 	if [[ $? -eq 0 ]]; then
 		echo -e "---> [\033[1;32mINFO\033[0m] Config Red Hat Quay registry successfully..."
 		echo -e "---> Please access Web UI like \033[1;32mhttps://<registry_ip>:8443\033[0m to complete config..."
@@ -30,7 +33,7 @@ config_quay() {
 }
 
 deploy_quay() {
-	ansible-playbook 40-provision-quay-registry.yml --tags deploy-quay
+	ansible-playbook provision-quay-registry.yml --tags deploy-quay
 }
 
 case $1 in
@@ -61,4 +64,3 @@ case $1 in
 		echo ""
 		;;
 esac
-
