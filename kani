@@ -3,7 +3,7 @@
 # Deploy Kubernetes v1.22.1 cluster with single node
 # and other cloud native elements through ansible.
 # Modified by hualf on 2021-12-19.
-#
+# 
 
 ### deploy and destroy kubernetes cluster ###
 deploy_kube() {
@@ -13,6 +13,10 @@ deploy_kube() {
 	echo -e "---> [\033[1;32mINFO\033[0m] Waiting for 5mins to initial kube cluster..."
 	sleep 300s
 	ansible-playbook 03-post-kube-deploy.yml
+}
+
+terminate_kube() {
+	ansible-playbook terminate-kube-cluster.yml
 }
 
 destroy_kube() {
@@ -40,6 +44,9 @@ case $1 in
 	deploy-kube)
 		deploy_kube
 		;;
+	terminate-kube)
+		terminate_kube
+		;;
 	destroy-kube)
 		destroy_kube
 		;;
@@ -57,10 +64,11 @@ case $1 in
 		echo "  kani [command]"
 		echo ""
 		echo "Available Commands: "
-		echo "  deploy-kube  	Deploy single master node kubernetes cluster with calico cni"
-		echo "  destroy-kube 	Destroy and prepare to re-install kubernetes cluster"
-		echo "  config-quay  	Config and run quay config container"
-		echo "  deploy-quay  	Deploy quay registry"
+		echo "  deploy-kube  	  Deploy single master node kubernetes cluster with calico cni"
+		echo "  terminate-kube  Terminate kubernetes master and worker nodes"
+		echo "  destroy-kube 	  Destroy and prepare to re-install kubernetes cluster"
+		echo "  config-quay  	  Config and run quay config container"
+		echo "  deploy-quay  	  Deploy quay registry"
 		echo ""
 		;;
 esac
